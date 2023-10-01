@@ -1,0 +1,29 @@
+Pour compiler : gcc -o crypteur main.c `sdl2-config --cflags --libs` -lSDL2_ttf -lSDL2_image -lm
+(necessite lSDL2ttf et lSDL2_image)
+
+options:
+-crypt;-decrypt(-c,-d) : crypter,decrypter. argument obligatoire.
+-fichier(-f) : défini le fichier contenant le texte à crypter (obligatoire)
+-espace (-e) : défini un espace entre les octets, 1 par défaut.
+-sortie;(-s): definir un nom pour l'image sortie
+-mdp (-m) : définir un mot de passe (ne fonctionne pas pour le mode parano)
+-parano (-p) : activer le mode parano.
+-gui: affiche l'interface graphique.
+
+
+/!\ Le cryptage en mode parano peut prendre du temps, le temps que le dictionnaire de mot s'écrive dans le fichier.
+/!\ Un cryptage effectué avec un espacement donné doit se décrypter avec ce même espacement, sinon erreur.
+/!\ Une image crypté en mode parano soit se décrypter en mode parano, sinon erreur
+
+exemple1 :
+./crypteur -c image.bmp -f source
+./crypteur -d fichier_cryptee.bmp
+
+exemple2:
+./crypteur -crypt image.bmp -f source -s sortie.bmp -mdp 123 -e 5
+./crypteur -d sortie.bmp -m 123 -e 5
+
+
+exemple3.
+./crypteur -crypt image.bmp -f source -s sortie.bmp -p
+./crypteur -d sortie.bmp -p
